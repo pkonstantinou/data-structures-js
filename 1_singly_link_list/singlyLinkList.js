@@ -116,12 +116,26 @@ class SinglyLinkList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === this.length - 1) return this.pop(index);
+    if (index === 0) return this.shift(index);
+
+    const prevNode = this.get(index - 1);
+    const removed = prevNode.next;
+    prevNode.next = removed.next;
+
+    this.length--;
+    return removed;
+  }
 }
 
 const list = new SinglyLinkList();
 list.push('hey');
 list.push('how');
 list.push('are');
-list.insert(1, 'Hello World!');
+console.log(list.insert(0, 'Hello World!'));
+console.log(list.remove(1, 'Hello World!'));
 
 console.log(list);
