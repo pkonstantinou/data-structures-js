@@ -91,13 +91,22 @@ class SinglyLinkList {
 
     return current;
   }
+
+  set(index, val) {
+    const node = this.get(index);
+
+    if (node) {
+      node.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 const list = new SinglyLinkList();
 list.push('hey');
 list.push('how');
 list.push('are');
+list.set(1, 'Hello World!');
 
-console.log(list.get(3));
-list.push(':)');
-console.log(list.get(3));
+console.log(list.get(1));
