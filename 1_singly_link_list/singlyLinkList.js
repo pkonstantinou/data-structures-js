@@ -78,6 +78,19 @@ class SinglyLinkList {
 
     return this;
   }
+
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+
+    let current = this.head;
+    let counter = 0;
+    while (counter !== index) {
+      current = current.next;
+      counter++;
+    }
+
+    return current;
+  }
 }
 
 const list = new SinglyLinkList();
@@ -85,5 +98,6 @@ list.push('hey');
 list.push('how');
 list.push('are');
 
-console.log(list.shift());
-console.log(list);
+console.log(list.get(3));
+list.push(':)');
+console.log(list.get(3));
