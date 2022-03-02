@@ -49,14 +49,26 @@ class SinglyLinkList {
 
     return current;
   }
+
+  shift() {
+    if (!this.head) return undefined;
+
+    const currentHead = this.head;
+    this.head = currentHead.next;
+    this.length--;
+
+    if (this.length === 0) {
+      this.tail = null;
+    }
+
+    return currentHead;
+  }
 }
 
 const list = new SinglyLinkList();
 list.push('hey');
 list.push('how');
 list.push('are');
-list.pop();
-list.pop();
-list.pop();
 
+console.log(list.shift());
 console.log(list);
