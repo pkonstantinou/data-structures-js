@@ -101,12 +101,27 @@ class SinglyLinkList {
     }
     return false;
   }
+
+  insert(index, val) {
+    if (index < 0 || index > this.length) return false;
+    if (index === this.length) return !!this.push(val);
+    if (index === 0) return !!this.unshift(val);
+
+    const newNode = new Node(val);
+    const prevNode = this.get(index - 1);
+
+    newNode.next = prevNode.next;
+    prevNode.next = newNode;
+
+    this.length++;
+    return true;
+  }
 }
 
 const list = new SinglyLinkList();
 list.push('hey');
 list.push('how');
 list.push('are');
-list.set(1, 'Hello World!');
+list.insert(1, 'Hello World!');
 
-console.log(list.get(1));
+console.log(list);
