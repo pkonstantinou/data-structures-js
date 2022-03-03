@@ -106,13 +106,22 @@ class DoublyLinkedList {
     }
     return node;
   }
+
+  set(index, val) {
+    const node = this.get(index);
+
+    if (node !== null) {
+      node.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 const list = new DoublyLinkedList();
 list.push('here');
 list.push('we');
 list.push('are');
-
-console.log(list.get(0));
-console.log(list.get(1));
+console.log(list.get(2));
+console.log(list.set(2, 'Pascuale'));
 console.log(list.get(2));
