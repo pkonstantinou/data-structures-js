@@ -80,11 +80,39 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+
+    const mid = Math.floor(index / 2);
+    let node;
+    let counter;
+    if (index <= mid) {
+      node = this.head;
+      counter = 0;
+
+      while (counter < index) {
+        node = node.next;
+        counter++;
+      }
+    } else {
+      node = this.tail;
+      counter = this.length - 1;
+
+      while (counter > index) {
+        node = node.prev;
+        counter--;
+      }
+    }
+    return node;
+  }
 }
 
 const list = new DoublyLinkedList();
 list.push('here');
 list.push('we');
 list.push('are');
-list.unshift('Pascuale');
-console.log(list);
+
+console.log(list.get(0));
+console.log(list.get(1));
+console.log(list.get(2));
