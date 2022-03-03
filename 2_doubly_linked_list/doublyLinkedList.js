@@ -134,11 +134,28 @@ class DoublyLinkedList {
 
     return true;
   }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    const removedNode = this.get(index);
+    removedNode.prev.next = removedNode.next;
+    removedNode.next.prev = removedNode.prev;
+    removedNode.next = null;
+    removedNode.prev = null;
+
+    this.length--;
+    return removedNode;
+  }
 }
 
 const list = new DoublyLinkedList();
 list.push('here');
 list.push('we');
 list.push('are');
-console.log(list.insert(1, 'Pascuale'));
+
+console.log(list.get(1));
+console.log(list.remove(1));
 console.log(list.get(1));
