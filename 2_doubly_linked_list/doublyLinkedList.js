@@ -57,12 +57,28 @@ class DoublyLinkedList {
       this.tail = null;
     } else {
       this.head = oldHead.next;
-      oldHead.next = null;
       this.head.prev = null;
+      oldHead.next = null;
     }
 
     this.length--;
     return oldHead;
+  }
+
+  unshift(val) {
+    const newNode = new Node(val);
+
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+    return this;
   }
 }
 
@@ -70,5 +86,5 @@ const list = new DoublyLinkedList();
 list.push('here');
 list.push('we');
 list.push('are');
-console.log(list.pop());
+list.unshift('Pascuale');
 console.log(list);
