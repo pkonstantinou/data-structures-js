@@ -5,7 +5,7 @@ class Node {
   }
 }
 
-class SinglyLinkList {
+class SinglyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -148,7 +148,7 @@ class SinglyLinkList {
   }
 }
 
-const list = new SinglyLinkList();
+const list = new SinglyLinkedList();
 list.push('hey');
 list.push('how');
 list.push('are');
