@@ -28,10 +28,29 @@ class DoublyLinkedList {
 
     return this;
   }
+
+  pop() {
+    if (!this.head) return undefined;
+
+    const oldTail = this.tail;
+
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = oldTail.prev;
+      this.tail.next = null;
+      oldTail.prev = null;
+    }
+
+    this.length--;
+    return oldTail;
+  }
 }
 
 const list = new DoublyLinkedList();
 list.push('here');
 list.push('we');
 list.push('are');
+console.log(list.pop());
 console.log(list);
