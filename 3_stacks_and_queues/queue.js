@@ -25,4 +25,26 @@ class Queue {
 
     return ++this.size;
   }
+
+  dequeue() {
+    if (!this.first) return null;
+
+    const temp = this.first;
+
+    if (this.first === this.last) {
+      this.last = null;
+    }
+    this.first = this.first.next;
+    this.size--;
+    return temp.val;
+  }
 }
+
+const q = new Queue();
+console.log(q.enqueue('first'));
+console.log(q.enqueue('second'));
+console.log(q.enqueue('third'));
+console.log(q.dequeue());
+console.log(q.dequeue());
+console.log(q.dequeue());
+console.log(q.dequeue());
