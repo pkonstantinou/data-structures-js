@@ -22,7 +22,27 @@ class HashTable {
     }
     this.keyMap[index].push([key, value]);
   }
+
+  get(key) {
+    let index = this._hash(key);
+
+    if (!this.keyMap[index]) return undefined;
+
+    for (let entry of this.keyMap[index]) {
+      if (entry[0] === key) return entry[1];
+    }
+  }
 }
 
-let ht = new HashTable();
-console.log(ht.set('hoho'));
+let ht = new HashTable(17);
+ht.set('maroon', '#800000');
+ht.set('yellow', '#FFFF00');
+ht.set('olive', '#808000');
+ht.set('salmon', '#FA8072');
+ht.set('lightcoral', '#F08080');
+ht.set('mediumvioletred', '#C71585');
+ht.set('plum', '#DDA0DD');
+console.log(ht.get('maroon'));
+console.log(ht.get('salmon'));
+console.log(ht.get('plum'));
+console.log(ht.get('plummm'));
