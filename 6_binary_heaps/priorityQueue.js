@@ -1,10 +1,21 @@
-class MaxBinaryTree {
+// It is a min binary heap that's powering it!
+
+class Node {
+  constructor(value, priority) {
+    this.value = value;
+    this.priority = priority;
+  }
+}
+
+class PriorityQueue {
   constructor() {
     this.values = [];
   }
 
-  insert(element) {
-    this.values.push(element);
+  enqueue(value, priority) {
+    const newNode = new Node(value, priority);
+
+    this.values.push(newNode);
     this.bubbleUp();
   }
 
@@ -16,7 +27,7 @@ class MaxBinaryTree {
       let parentIdx = Math.floor((idx - 1) / 2);
       let parent = this.values[parentIdx];
 
-      if (element <= parent) break;
+      if (element.priority >= parent.priority) break;
 
       this.values[parentIdx] = element;
       this.values[idx] = parent;
@@ -24,15 +35,15 @@ class MaxBinaryTree {
     }
   }
 
-  extractMax() {
-    const max = this.values[0];
+  dequeue() {
+    const min = this.values[0];
     const end = this.values.pop();
 
     if (this.values.length > 0) {
       this.values[0] = end;
       this.sinkDown();
     }
-    return max;
+    return min;
   }
 
   sinkDown() {
@@ -48,7 +59,7 @@ class MaxBinaryTree {
 
       if (leftChildIdx < length) {
         leftChild = this.values[leftChildIdx];
-        if (leftChild > element) {
+        if (leftChild.priority < element.priority) {
           swap = leftChildIdx;
         }
       }
@@ -56,8 +67,8 @@ class MaxBinaryTree {
       if (rightChildIdx < length) {
         rightChild = this.values[rightChildIdx];
         if (
-          (swap === null && rightChild > element) ||
-          (swap !== null && rightChild > leftChild)
+          (swap === null && rightChild.priority < element.priority) ||
+          (swap !== null && rightChild.priority < leftChild.priority)
         ) {
           swap = rightChildIdx;
         }
@@ -71,28 +82,15 @@ class MaxBinaryTree {
   }
 }
 
-let heap = new MaxBinaryTree();
-heap.insert(41);
-heap.insert(39);
-heap.insert(33);
-heap.insert(18);
-heap.insert(27);
-heap.insert(12);
-heap.insert(55);
-console.log(heap.values);
-console.log(heap.extractMax());
-console.log(heap.values);
-console.log(heap.extractMax());
-console.log(heap.values);
-console.log(heap.extractMax());
-console.log(heap.values);
-console.log(heap.extractMax());
-console.log(heap.values);
-console.log(heap.extractMax());
-console.log(heap.values);
-console.log(heap.extractMax());
-console.log(heap.values);
-console.log(heap.extractMax());
-console.log(heap.values);
-// [41, 39, 33, 18, 27, 12]
-//  0   1   2   3   4   5
+const queue = new PriorityQueue();
+queue.enqueue('here', 10);
+queue.enqueue('we', 3);
+queue.enqueue('are', 7);
+queue.enqueue('my', 4);
+queue.enqueue('friends', 10);
+console.log(queue);
+console.log(queue.dequeue());
+console.log(queue.dequeue());
+console.log(queue.dequeue());
+console.log(queue.dequeue());
+console.log(queue.dequeue());
