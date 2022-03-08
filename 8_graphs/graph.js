@@ -28,14 +28,62 @@ class Graph {
     }
     delete this.adjacencyList[vertex];
   }
+
+  depthFirstRecursive(vertex) {
+    const result = [];
+    const visited = {};
+
+    const DFT = (vertex) => {
+      if (!vertex) return null;
+      visited[vertex] = true;
+      result.push(vertex);
+      for (let neighbour of this.adjacencyList[vertex]) {
+        if (!visited[neighbour]) {
+          DFT(neighbour);
+        }
+      }
+    };
+    DFT(vertex);
+    return result;
+  }
+
+  depthFirstIterative(vertex) {
+    const stack = [vertex];
+    const result = [];
+    const visited = {};
+    let currentVertex;
+
+    visited[vertex] = true;
+
+    while (stack.length) {
+      currentVertex = stack.pop();
+      result.push(currentVertex);
+
+      this.adjacencyList[currentVertex].forEach((neighbour) => {
+        if (!visited[neighbour]) {
+          visited[neighbour] = true;
+          stack.push(neighbour);
+        }
+      });
+    }
+    return result;
+  }
 }
 
 const g = new Graph();
-g.addVertex('Dallas');
-g.addVertex('Tokyo');
-g.addVertex('Aspen');
-g.addEdge('Dallas', 'Tokyo');
-g.addEdge('Dallas', 'Aspen');
-console.log(g);
-g.removeEdge('Dallas', 'Tokyo');
-console.log(g);
+g.addVertex('A');
+g.addVertex('B');
+g.addVertex('C');
+g.addVertex('D');
+g.addVertex('E');
+g.addVertex('F');
+
+g.addEdge('A', 'B');
+g.addEdge('A', 'C');
+g.addEdge('B', 'D');
+g.addEdge('C', 'E');
+g.addEdge('D', 'E');
+g.addEdge('D', 'F');
+g.addEdge('E', 'F');
+console.log(g.depthFirstRecursive('A'));
+console.log(g.depthFirstIterative('A'));
